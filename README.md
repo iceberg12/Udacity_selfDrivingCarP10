@@ -101,4 +101,11 @@ In my solution I have relaxed the steering angle constraint from 25 to 30 deg to
 
 ### Performance
 
+With 50 and 70 km/h the tracking is good, so I decided to give you a look at how the car at 100km/h performed :D.
+
 [Youtube Link](https://www.youtube.com/watch?v=Fqg6Cjc1lIw)
+
+### References
+
+1. [Jeremy Shannon's Respiratory](https://github.com/jeremy-shannon/CarND-MPC-Project). A good start.
+2. [Ksakmann's Implementation](https://github.com/ksakmann/CarND-MPC-Project/). Here I learned from him how to deal with input latency.
