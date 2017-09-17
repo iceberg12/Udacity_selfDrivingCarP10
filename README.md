@@ -98,3 +98,7 @@ At sampling rate **dt**, the MPC controller tries to look at the trajectory N st
 #### System Contraints
 
 In my solution I have relaxed the steering angle constraint from 25 to 30 deg to allow better steering performance from the car MPC controller.
+
+### Performance
+
+[Youtube Link](https://www.youtube.com/watch?v=Fqg6Cjc1lIw)
