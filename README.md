@@ -61,7 +61,7 @@ Self-Driving Car Engineer Nanodegree Program
 3. Compile: `cmake .. && make`
 4. Run it: `./mpc`.
 
-## Goal
+## 1. Goal
 
 In this implementation, I will build a MPC steering and throttle controller for an auto-driving car. Given an optimal path to follow, the job of this controller is to drive accordingly with respect to all the system contraints: maximum steering angle, rate of change of steering, throttle rate of change, etc. Tracking curvy trajectories and dealing with these contraints are two of the prominent strengths of MPC algorithm compared to basic controllers like PID.
 
@@ -69,7 +69,7 @@ The second goal of this project is also program the controller to cope with inpu
 
 The third goal, to challenge myself, is achieving 100km/h car speed on straight roads. Higher speed comes with higher difficulty, especially under the input-latency condition.
 
-## Implementation
+## 2. Implementation
 
 #### The Model 
 
@@ -109,7 +109,7 @@ With 50 and 70 km/h the tracking is good, so I decided to give you a look at how
 
 [Youtube Link](https://www.youtube.com/watch?v=Fqg6Cjc1lIw)
 
-### References
+## 3. References
 
 1. [Jeremy Shannon's Respiratory](https://github.com/jeremy-shannon/CarND-MPC-Project). A good start.
 2. [Ksakmann's Implementation](https://github.com/ksakmann/CarND-MPC-Project/). Here I learned from him how to deal with input latency.
