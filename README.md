@@ -61,4 +61,40 @@ Self-Driving Car Engineer Nanodegree Program
 3. Compile: `cmake .. && make`
 4. Run it: `./mpc`.
 
+## Goal
 
+In this implementation, I will build a MPC steering and throttle controller for an auto-driving car. Given an optimal path to follow, the job of this controller is to drive accordingly with respect to all the system contraints: maximum steering angle, rate of change of steering, throttle rate of change, etc. Tracking curvy trajectories and dealing with these contraints are two of the prominent strengths of MPC algorithm compared to basic controllers like PID.
+
+The second goal of this project is also program the controller to cope with input latency. For example, any steering or throttle input is delayed by 100ms before it reflects under our car system.
+
+The third goal, to challenge myself, is achieving 100km/h car speed on straight roads. Higher speed comes with higher difficulty, especially under the input-latency condition.
+
+## Implementation
+
+The system in the car simulator is a kinematic model. Assume **x,y** is the coordinate from the car perspective, **psi** is the car heading angle and **v** is the speed, we have:
+
+where Lf measures the distance between the front of the vehicle and its center of gravity. The larger the vehicle, the slower the turn rate. Note that there are two inputs for this system: steering wheel change **delta** and throttle **a**.
+
+Mathematically, the MPC controller tries to optimize a defined performance cost, with respect to input and state constraints. The performance cost is flexible and you can add:
+
+1. Reference state cost. For examples: tracking error shows how good the car follow the trajectory, speed reference error is needed if you want it to drive at 100km/h but allow some flexibility for the car to reduce speed at shape turns.
+2. Minimize the use of actuators. You do not want the car to act with sharp turning or overspeed. 
+3. Minimize the value gap between sequential actuations. It avoids abruptedly reaction in either steering or throttle.
+
+The state/input constraints are more for physical constraints of the car systems. For instance, you restrict steering to less than 30 deg, and acceleration is within [-1, 1].
+
+### Tuning MPC
+
+#### Prediction Range
+
+At sampling rate **dt**, the MPC controller tries to look at the trajectory N steps ahead to follow. A good approach to setting N, dt, and T is to first determine a reasonable range for T and then tune dt and N appropriately, keeping the effect of each in mind. 
+
+#### Weights in Performance Cost
+
+1. To reduce tracking error, increase weights for x, y sum-of-square errors.
+2. Try adding penalty for speed * steer to avoid high speed at turns.
+3. Minimize the value gap between sequential actuations by increasing weights for changes of delta and throttle.
+
+#### System Contraints
+
+In my solution I have relaxed the steering angle constraint from 25 to 30 deg to allow better steering performance from the car MPC controller.
