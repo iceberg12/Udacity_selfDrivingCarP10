@@ -91,6 +91,8 @@ At sampling rate **dt**, the MPC controller tries to look at the trajectory N st
 
 #### Polynomial Fitting and MPC Preprocessing
 
+I used the waypoints identified on the target trajectory to fit a 3rd-order polynomial (adapted from https://github.com/JuliaMath/Polynomials.jl/blob/master/src/Polynomials.jl#L676-L716) and use this smoothed fitting as the target for the MPC solver.
+
 #### Weights in Performance Cost
 
 1. To reduce tracking error, increase weights for x, y sum-of-square errors.
@@ -103,13 +105,17 @@ In my solution I have relaxed the steering angle constraint from 25 to 30 deg to
 
 #### Model Predictive Control with Latency
 
-### Performance
+First I calculated the latency step, which is equal to Latency[s] / Sampling_rate. For example, 100ms latency with sampling rate 0.05s leads to latency step 2. 
+
+From the Reference 2, I used the following approach: the control problem is solved from the current position and time onwards. Latency is taken into account by constraining the controls to the values of the previous iteration for the duration of the latency. Thus the optimal trajectory is computed starting from the time after the latency period.
+
+## 3. Performance
 
 With 50 and 70 km/h the tracking is good, so I decided to give you a look at how the car at 100km/h performed :D.
 
 [Youtube Link](https://www.youtube.com/watch?v=Fqg6Cjc1lIw)
 
-## 3. References
+#### References
 
 1. [Jeremy Shannon's Respiratory](https://github.com/jeremy-shannon/CarND-MPC-Project). A good start.
 2. [Ksakmann's Implementation](https://github.com/ksakmann/CarND-MPC-Project/). Here I learned from him how to deal with input latency.
