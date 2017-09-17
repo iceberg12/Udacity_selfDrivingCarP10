@@ -71,6 +71,8 @@ The third goal, to challenge myself, is achieving 100km/h car speed on straight 
 
 ## Implementation
 
+#### The Model 
+
 The system in the car simulator is a kinematic model. Assume **x,y** is the coordinate from the car perspective, **psi** is the car heading angle and **v** is the speed, we have:
 
 where Lf measures the distance between the front of the vehicle and its center of gravity. The larger the vehicle, the slower the turn rate. Note that there are two inputs for this system: steering wheel change **delta** and throttle **a**.
@@ -83,11 +85,11 @@ Mathematically, the MPC controller tries to optimize a defined performance cost,
 
 The state/input constraints are more for physical constraints of the car systems. For instance, you restrict steering to less than 30 deg, and acceleration is within [-1, 1].
 
-### Tuning MPC
-
-#### Prediction Range
+#### Timestep Length and Elapsed Duration (N & dt)
 
 At sampling rate **dt**, the MPC controller tries to look at the trajectory N steps ahead to follow. A good approach to setting N, dt, and T is to first determine a reasonable range for T and then tune dt and N appropriately, keeping the effect of each in mind. 
+
+#### Polynomial Fitting and MPC Preprocessing
 
 #### Weights in Performance Cost
 
@@ -98,6 +100,8 @@ At sampling rate **dt**, the MPC controller tries to look at the trajectory N st
 #### System Contraints
 
 In my solution I have relaxed the steering angle constraint from 25 to 30 deg to allow better steering performance from the car MPC controller.
+
+#### Model Predictive Control with Latency
 
 ### Performance
 
