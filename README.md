@@ -1,5 +1,11 @@
-# CarND-MPC-Project
-Self-Driving Car Engineer Nanodegree Program
+## Udacity Self-driving Car Nanodegree
+
+---
+
+### **Vehicle Detection and Tracking**
+
+[statespace]: ./images/statespace.png
+[trajectory]: ./images/trajectory.png
 
 ---
 
@@ -75,7 +81,11 @@ The third goal, to challenge myself, is achieving 100km/h car speed on straight 
 
 The system in the car simulator is a kinematic model. Assume **x,y** is the coordinate from the car perspective, **psi** is the car heading angle and **v** is the speed, we have:
 
-where Lf measures the distance between the front of the vehicle and its center of gravity. The larger the vehicle, the slower the turn rate. Note that there are two inputs for this system: steering wheel change **delta** and throttle **a**.
+![alt text][statespace]
+
+where Lf measures the distance between the front of the vehicle and its center of gravity. The larger the vehicle, the slower the turn rate. Note that there are two inputs for this system: steering wheel change and throttle.
+
+![alt text][trajectory]
 
 Mathematically, the MPC controller tries to optimize a defined performance cost, with respect to input and state constraints. The performance cost is flexible and you can add:
 
